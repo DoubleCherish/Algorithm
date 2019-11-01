@@ -1,0 +1,39 @@
+难度 ： *
+描述 ：给定加减乘除表达式的逆波兰表示法，求出表达式的结果
+实现 ：
+import java.util.Stack;
+public class Solution {
+    public int evalRPN(String[] tokens) {
+        if(tokens == null || tokens.length == 0){
+            return 0;
+        }
+        Stack<String> stack = new Stack<>();
+        for(String t : tokens){
+            switch (t){
+                case "+":
+                    int one = Integer.parseInt(stack.pop());
+                    int two = Integer.parseInt(stack.pop());
+                    stack.push(String.valueOf(two+one));
+                    break;
+                case "-":
+                    int one1 = Integer.parseInt(stack.pop());
+                    int two1 = Integer.parseInt(stack.pop());
+                    stack.push(String.valueOf(two1-one1));
+                    break;
+                case "*":
+                    int one2 = Integer.parseInt(stack.pop());
+                    int two2 = Integer.parseInt(stack.pop());
+                    stack.push(String.valueOf(one2*two2));
+                    break;
+                case "/":
+                    int one3 = Integer.parseInt(stack.pop());
+                    int two3 = Integer.parseInt(stack.pop());
+                    stack.push(String.valueOf(two3/one3));
+                    break;
+                default:
+                    stack.push(t);
+            }
+        }
+        return Integer.parseInt(stack.pop());
+    }
+}
